@@ -1,4 +1,4 @@
-# Script Name: rsautl_decrypt_with_python.py
+# Script name: pkeyutl_encrypt_python_decrypt.py
 
 import subprocess
 import os
@@ -17,12 +17,12 @@ def generate_rsa_keys():
     print("RSA keys generated.")
 
 def encrypt_message(message):
-    print("Encrypting message using 'rsautl' subcommand with PKCS#1 v1.5 padding...")
+    print("Encrypting message using 'pkeyutl' subcommand with default PKCS#1 v1.5 padding...")
     with open('plaintext.txt', 'w') as f:
         f.write(message)
     print("Input: plaintext.txt")
     
-    subprocess.run([OPENSSL_PATH, 'rsautl', '-encrypt', '-inkey', 'public_key.pem', '-pubin', '-in', 'plaintext.txt', '-out', 'encrypted.bin'])
+    subprocess.run([OPENSSL_PATH, 'pkeyutl', '-encrypt', '-inkey', 'public_key.pem', '-pubin', '-in', 'plaintext.txt', '-out', 'encrypted.bin'])
     print("Output: encrypted.bin")
     print("Message encrypted.")
 
@@ -48,7 +48,7 @@ def decrypt_message_with_python():
     return decrypted_message.decode()
 
 def main():
-    print("Starting RSA encryption with rsautl and decryption with Python...")
+    print("Starting RSA encryption with pkeyutl and decryption with Python...")
     
     generate_rsa_keys()
     
